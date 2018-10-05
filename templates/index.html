@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+    <form action="{{ url_for('tweet') }}"  method=post>
+      <p>
+	Write here:
+        <input type=text name=tweetText size=43>
+        <input type=submit value="New Tweet">
+      </p>
+    </form>
+    <form action="{{ url_for('tweet') }}"  method=post>
+      <p>
+	Tweet ID:
+        <input type=text name=tweetID size=40>
+        <input type=submit value="Retweet">
+        <input type=submit value="Delete">
+      </p>
+    </form>
+    <p>
+User ID:
+      <input type=text name=userID size=15>
+User name:
+      <input type=text name=username size=18>
+      <input type=submit value="Follow">
+    </p>
+  </form>
+  <form action="{{ url_for('tweet') }}"  method=post>
+    <p>
+    <br/>
+    <h3>Mis tweets</h3>
+
+    # Si hay tweets mostrarlos
+
+{% endblock %}
