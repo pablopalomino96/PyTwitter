@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
+
 {% block body %}
+<h3>Funtionalities</h3>
     <form action="{{ url_for('tweet') }}"  method=post>
       <p>
 	Write here:
@@ -7,27 +9,32 @@
         <input type=submit value="New Tweet">
       </p>
     </form>
-    <form action="{{ url_for('tweet') }}"  method=post>
+    <form action="{{ url_for('deleteTweet') }}"  method=post>
       <p>
 	Tweet ID:
-        <input type=text name=tweetID size=40>
-        <input type=submit value="Retweet">
+        <input type=text name=tweetID size=30>
         <input type=submit value="Delete">
       </p>
     </form>
+    <form action="{{ url_for('retweet') }}"  method=post>
+      <p>
+	Tweet ID:
+        <input type=text name=tweetID size=30>
+        <input type=submit value="Retweet">
+      </p>
+    </form>
+    <form action="{{ url_for('follow') }}"  method=post>
     <p>
-User ID:
+    User ID:
       <input type=text name=userID size=15>
-User name:
+    User name:
       <input type=text name=username size=18>
       <input type=submit value="Follow">
     </p>
   </form>
-  <form action="{{ url_for('tweet') }}"  method=post>
     <p>
     <br/>
-    <h3>Mis tweets</h3>
+    <h3>Last Recent Tweets</h3>
 
-    # Si hay tweets mostrarlos
-
+tweets...
 {% endblock %}

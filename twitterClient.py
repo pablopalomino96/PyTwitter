@@ -98,17 +98,20 @@ def oauthorized():
 # Operaciones
 @app.route('/deleteTweet', methods=['POST'])
 def deleteTweet():
+    flash ('Tweet Deleted','success')
     return redirect(url_for('index'))
 
 
 
 @app.route('/retweet', methods=['POST'])
 def retweet():
+    flash ('Tweet Retweeted','success')
     return redirect(url_for('index'))
 
 
 @app.route('/follow', methods=['POST'])
 def follow():
+    flash ('User Followed','success')
     return redirect(url_for('index'))
 
 
@@ -126,7 +129,7 @@ def tweet():
 
     # Paso 4: Comprobar que todo fue bien (no hubo errores) e informar al usuario
                # La anterior llamada devuelve el response, mirar el estado (status)
-
+    flash ('Tweet Published','success')
     # Paso 5: Redirigir a pagina principal (hecho)
     return redirect(url_for('index'))
 

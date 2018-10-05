@@ -6,22 +6,30 @@
   filename='style.css') }}">
 </head>
 <body>
-<h1><img src="static/twitter.png" width="48" height="48" alt="logo uclm">Cliente Twitter</h1>
+<h1><img src="static/twitter.png" width="48" height="48" alt="logo uclm"> # Twitter Client</h1>
   {% if user %}
   <a href="{{ url_for('logout') }}"><img src="{{url_for('static', filename='sign-out.png') }}" alt="sign out"></a>
   {% else %}
   <a href="{{ url_for('login') }}"><img src="{{url_for('static', filename='sign-in.png') }}" alt="sign in"></a>
   {% endif %}
 
-
-  # Aqui flashing
-
+  {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+    <p class=message>
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </p>
+    {% endif %}
+  {% endwith %}
 
 {% block body %}{% endblock %}
+<h4>____________________________________________________________________________</h4>
+<img src="static/uclm.png" width="300" height="100" alt="logo uclm">
 <h4>Pablo Palomino Gomez</h4>
 <h4>Aplicaciones Distribuidas en Internet</h4>
 <h4>
-<img src="static/uclm.png" width="300" height="100" alt="logo uclm">
+
 </h4>
 </body>
 </html>
