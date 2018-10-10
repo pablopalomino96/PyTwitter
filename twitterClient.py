@@ -54,13 +54,17 @@ def before_request():
 def index():
     global currentUser
 
-    tweets = None
+    info = None
+    tweets = []
     if currentUser is not None:
         resp = twitter.request('statuses/home_timeline.json')
         if resp.status == 200:
-            tweets = resp.data
+            info = resp.data
+            for tweet in info:
+                tweets.append(str(tweet['id'])+" - "+tweet['user']['name']+":  "+tweet['text'])
         else:
             flash('Imposible acceder a Twitter.')
+
     return render_template('index.html', user=currentUser, tweets=tweets)
 
 

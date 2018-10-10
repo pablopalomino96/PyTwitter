@@ -34,7 +34,18 @@
   </form>
     <p>
     <br/>
-    <h3>Last Recent Tweets</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <tr>
+        <th>Last Recent Tweets</th>
+      </tr>
+      {% for tweet in tweets %}
+      <tr>
+        <td>{{ tweet }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-tweets...
+
 {% endblock %}
