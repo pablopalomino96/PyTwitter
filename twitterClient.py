@@ -102,7 +102,16 @@ def oauthorized():
 # Operaciones
 @app.route('/deleteTweet', methods=['POST'])
 def deleteTweet():
-    flash ('Tweet Deleted','success')
+    global currentUser
+    tweetid = request.form['tweetID']
+    if currentUser is not None:
+        resp = twitter.post('statuses/destroy/'+tweetid+'.json')
+        if resp.status == 200:
+            flash ('Tweet Deleted','success')
+        else:
+            flash ('An error has occurred. Tweet not Deleted','success')
+    else:
+        flash ('You must be authenticate!', 'success')
     return redirect(url_for('index'))
 
 
