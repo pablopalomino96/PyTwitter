@@ -103,13 +103,14 @@ def oauthorized():
 @app.route('/deleteTweet', methods=['POST'])
 def deleteTweet():
     global currentUser
-    tweetid = request.form['tweetID']
+
     if currentUser is not None:
+        tweetid = request.form['tweetID']
         resp = twitter.post('statuses/destroy/'+tweetid+'.json')
         if resp.status == 200:
             flash ('Tweet Deleted','success')
         else:
-            flash ('An error has occurred. Tweet not Deleted','success')
+            flash ('An error has occurred. Not Deleted','success')
     else:
         flash ('You must be authenticate!', 'success')
     return redirect(url_for('index'))
@@ -118,7 +119,17 @@ def deleteTweet():
 
 @app.route('/retweet', methods=['POST'])
 def retweet():
-    flash ('Tweet Retweeted','success')
+    global currentUser
+
+    if currentUser is not None:
+        tweetid = request.form['tweetID']
+        resp = twitter.post('statuses/retweet/'+tweetid+'.json')
+        if resp.status == 200:
+            flash ('Tweet Retweeted','success')
+        else:
+            flash ('An error has occurred. Not Retweeted','success')
+    else:
+        flash ('You must be authenticate!', 'success')
     return redirect(url_for('index'))
 
 
@@ -133,19 +144,29 @@ def follow():
 def tweet():
     # Paso 1: Si no estoy logueado redirigir a pagina de /login
                # Usar currentUser y redirect
+    global currentUser
 
+    if currentUser is not None:
     # Paso 2: Obtener los datos a enviar
-               # Usar request (form)
-
+                       # Usar request (form)
+        tweet = request.form['tweetText']
     # Paso 3: Construir el request a enviar con los datos del paso 2
-               # Utilizar alguno de los metodos de la instancia twitter (post, request, get, ...)
+   # Utilizar alguno de los metodos de la instancia twitter (post, request, get, ...)
 
+        resp = twitter.post('statuses/update.json', {'status': tweet })
     # Paso 4: Comprobar que todo fue bien (no hubo errores) e informar al usuario
-               # La anterior llamada devuelve el response, mirar el estado (status)
+       # La anterior llamada devuelve el response, mirar el estado (status)
+        if resp.status == 200:
+            flash ('Tweet Published','success')
+        else:
+            flash ('An error has occurred. Not Published','success')
+    else:
+        flash ('You must be authenticate!', 'success')
+    return redirect(url_for('index'))
+
     flash ('Tweet Published','success')
     # Paso 5: Redirigir a pagina principal (hecho)
     return redirect(url_for('index'))
-
 
 
 
