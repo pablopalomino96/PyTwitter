@@ -135,7 +135,22 @@ def retweet():
 
 @app.route('/follow', methods=['POST'])
 def follow():
-    flash ('User Followed','success')
+    global currentUser
+
+    if currentUser is not None:
+        userid = request.form['userID']
+        username = request.form['username']
+        if len(userid) == 0:
+            resp = twitter.post('friendships/create.json',{'screen_name': username})
+        else:
+            resp = twitter.post('friendships/create.json',{'user_id': userid})
+
+        if resp.status == 200:
+            flash ('User Followed', 'success')
+        else:
+            flash ('Not Followed. An error has occured', 'success')
+    else:
+        flash ('You must be authenticate!', 'success')
     return redirect(url_for('index'))
 
 
