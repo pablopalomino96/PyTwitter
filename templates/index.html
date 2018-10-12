@@ -23,6 +23,13 @@
         <input type=submit value="Retweet">
       </p>
     </form>
+    <form action="{{ url_for('favorite') }}"  method=post>
+      <p>
+	Tweet ID:
+        <input type=text name=tweetID size=30>
+        <input type=submit value="Favorite">
+      </p>
+    </form>
     <form action="{{ url_for('follow') }}"  method=post>
     <p>
     User ID:

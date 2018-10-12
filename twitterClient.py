@@ -132,6 +132,21 @@ def retweet():
         flash ('You must be authenticate!', 'success')
     return redirect(url_for('index'))
 
+@app.route('/favorite', methods=['POST'])
+def favorite():
+    global currentUser
+
+    if currentUser is not None:
+        tweetid = request.form['tweetID']
+        resp = twitter.post('favorites/create.json', {'id': tweetid})
+        if resp.status == 200:
+            flash ('Tweet added to Favorites','success')
+        else:
+            flash ('An error has occurred. Not added to favorites','success')
+    else:
+        flash ('You must be authenticate!', 'success')
+    return redirect(url_for('index'))
+
 
 @app.route('/follow', methods=['POST'])
 def follow():
