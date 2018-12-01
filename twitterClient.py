@@ -11,7 +11,6 @@ from flask import Flask, request, redirect, url_for, flash, render_template
 from flask_oauthlib.client import OAuth
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 oauth = OAuth()
 mySession=None
 currentUser=None
@@ -202,4 +201,4 @@ def tweet():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True,host='0.0.0.0',port=7000)
