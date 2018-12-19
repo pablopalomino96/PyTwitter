@@ -112,6 +112,7 @@ def deleteTweet():
             flash ('An error has occurred. Not Deleted','success')
     else:
         flash ('You must be authenticate!', 'success')
+        return redirect(url_for('login'))
     return redirect(url_for('index'))
 
 
@@ -129,6 +130,7 @@ def retweet():
             flash ('An error has occurred. Not Retweeted','success')
     else:
         flash ('You must be authenticate!', 'success')
+        return redirect(url_for('login'))
     return redirect(url_for('index'))
 
 @app.route('/favorite', methods=['POST'])
@@ -144,6 +146,7 @@ def favorite():
             flash ('An error has occurred. Not added to favorites','success')
     else:
         flash ('You must be authenticate!', 'success')
+        return redirect(url_for('login'))
     return redirect(url_for('index'))
 
 
@@ -165,6 +168,7 @@ def follow():
             flash ('Not Followed. An error has occured', 'success')
     else:
         flash ('You must be authenticate!', 'success')
+        return redirect(url_for('login'))
     return redirect(url_for('index'))
 
 
@@ -191,6 +195,7 @@ def tweet():
             flash ('An error has occurred. Not Published','success')
     else:
         flash ('You must be authenticate!', 'success')
+        return redirect(url_for('login'))
     return redirect(url_for('index'))
 
     flash ('Tweet Published','success')
